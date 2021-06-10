@@ -20,4 +20,17 @@ export class PatientService{
       })
     })
   }
+
+  deletePatient(id: number){
+    return new Promise((resolve, reject)=>{
+      this.http.delete('api/patients/'+id).toPromise()
+      .then((response) => {
+        resolve(response)
+      }, error => {
+        reject(error)
+      }
+      )
+    })
+  }
+
 }
