@@ -10,8 +10,10 @@ exports.create = (patient, response) => {
 }
 
 exports.findAll = (response) => {
-    dbConnector.query("SELECT Patients.*, Guardians.name as guardian_name, Guardians.phone as guardian_phone"  
-    +" FROM Patients INNER JOIN Guardians ON Patients.id = Guardians.id_patient", 
+    dbConnector.query("SELECT Patients.*, Guardians.name as guardian_name, Guardians.phone as guardian_phone,"
+    +" Hospitals.name as hospital_name, Hospitals.city as hospital_city FROM Patients"  
+    +" INNER JOIN Guardians ON Patients.id = Guardians.id_patient"
+    +" INNER JOIN Hospitals ON Patients.id_hospital = Hospitals.id", 
         (error, result) => {
             error? response(error) : response(false, result);
         }
@@ -20,7 +22,9 @@ exports.findAll = (response) => {
 
 exports.find = (patientId, response) => {
     dbConnector.query("SELECT Patients.*, Guardians.name as guardian_name, Guardians.phone as guardian_phone"  
-    +" FROM Patients INNER JOIN Guardians ON Patients.id = Guardians.id_patient WHERE id = ?", patientId,
+    +" Hospitals.name as hospital_name, Hospitals.city as hospital_city FROM Patients"  
+    +" INNER JOIN Guardians ON Patients.id = Guardians.id_patient"
+    +" INNER JOIN Hospitals ON Patients.id_hospital = Hospitals.id WHERE id = ?", patientId,
         (error, result) => {
             error? response(error) : response(false, result);
         }
