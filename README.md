@@ -7,7 +7,7 @@ Prueba técnica para el proceso de selección de Nativo Digital.
 1. Para instalar la base de datos necesita tener instalado [mysql](https://www.mysql.com/downloads/) y un cliente SQL ( recomendación: [DBeaver](https://dbeaver.io/download/) ).
 2. Ejecutar el [script](./database/creation.sql) de creación de la base de datos. Puede encontrar más información sobre el diccionario de datos con todas las especificaciones de las entidades y atributos analizados [aquí](./database).
 3. Ejecutar el [script](./database/populate.sql) de creación de registros para llenar la base de datos con información de prueba.
->Nota: En caso de ser necesario el nombre de usuario o la contraseña del usuario de la base de datos en el archivo [backend/config/db.config.js](./backend/config/db.config.js) 
+>Nota: En caso de ser necesario, modifique el nombre o la contraseña del usuario de la base de datos en el archivo [backend/config/db.config.js](./backend/config/db.config.js) 
 
 ### Backend
 1. Para poder ejecutar correctamente el servidor necesita tener instalado [node.js](https://nodejs.org/es/).
