@@ -16,7 +16,7 @@ exports.create = (request, response) => {
                     { message: 'DB internal error.' });
                 else
                 response.status(200).json(
-                    { hospital_id: hospital_id }
+                    { id: hospital_id }
                 );
             }
         );

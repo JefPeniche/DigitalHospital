@@ -1,1 +1,85 @@
-<p>edit-patient works!</p>
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <span>Digital Hospital</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+  <mat-card-content>
+    <form class="form-container" [formGroup]="patientForm" >
+      <mat-card-header>
+        <mat-card-title>Información personal</mat-card-title>
+      </mat-card-header>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombres</mat-label>
+        <input type="text" matInput formControlName="names" placeholder="Ingrese su(s) nombre(s)">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar su nombre </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido Paterno</mat-label>
+        <input type="text" matInput formControlName="lastName" placeholder="Ingrese su apellido paterno">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar su apellido paterno </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido Materno</mat-label>
+        <input type="text" matInput formControlName="secondLastName" placeholder="Ingrese su apellido maerno">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar su apellido materno </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput formControlName="birthday" [matDatepicker]="picker">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar una fecha válida</mat-error>
+
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker  startView="multi-year"></mat-datepicker>
+      </mat-form-field>
+      <mat-radio-group formControlName="sex">
+        <mat-radio-button value="F">Mujer</mat-radio-button>
+        <mat-radio-button class="radio-M" value="M">Hombre</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-card-header>
+        <mat-card-title>Inscripción</mat-card-title>
+      </mat-card-header>
+      <mat-form-field appearance="outline">
+        <mat-label>Hospital de Origen</mat-label>
+        <input type="text" placeholder="Eliga un hospital" matInput
+              [formControl]="hospitalName" [matAutocomplete]="auto">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar su hospital de origen </mat-error>
+        <mat-autocomplete (optionSelected)="onHospitalChange($event)" autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let hospital of filteredHospitals | async" [value]="hospital.name" [id]="hospital.id.toString()+'|'+hospital.city" >
+            {{hospital.name}} <small>{{hospital.city}}</small>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ciudad de Origen</mat-label>
+        <input type="text" matInput formControlName="hospitalCity" placeholder="Ingrese su ciudad de origen">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar su ciudad de origen </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de inscripción</mat-label>
+        <input matInput formControlName="inscriptionDate" [matDatepicker]="picker2">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar una fecha válida </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-card-header>
+        <mat-card-title>Información del tutor</mat-card-title>
+      </mat-card-header>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del tutor</mat-label>
+        <input type="text" matInput formControlName="guardianName" placeholder="Ingrese el nombre del tutor">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar al tutor </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono del tutor</mat-label>
+        <input type="text" matInput formControlName="guardianPhone" placeholder="Ingrese el teléfono del tutor">
+        <mat-error *ngIf="!patientForm.valid"> Necesita ingresar el teléfono del tutor (Máximo 10 dígitos) </mat-error>
+      </mat-form-field>
+      <button type="submit" (click)="onSubmit()" mat-raised-button color="primary">GUARDAR</button>
+      <a href="/" mat-button>CANCELAR</a>
+
+    </form>
+  </mat-card-content>
+</mat-card>

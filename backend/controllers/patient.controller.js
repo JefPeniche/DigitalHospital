@@ -11,12 +11,12 @@ exports.create = (request, response) => {
     else Patient.create(bodyPatient.data, 
         (error, resultPatient) => {  
             if (error)  response.status(500).send(
-                { message: 'DB internal error. '});
+                { message: 'DB internal error. ' + error});
             
             else  Guardian.create( {id_patient: resultPatient.insertId ,...bodyGuardian.data},
                 (error, resultGuardian)=>{
                     if (error)  response.status(500).send(
-                        { message: ' DB internal error. '});
+                        { message: ' DB internal error. ' + error});
                     else  response.status(200).json(
                         { patient_id: resultPatient.insertId}
                     );
@@ -46,14 +46,12 @@ exports.find = (request, response) => {
     else Patient.find(id,
         (error, patient) => {
             if (error)  response.status(500).send(
-                { message: 'DB internal error.' });
+                { message: 'DB internal error.' + error});
             else{
                 if(patient.length > 0)  response.status(200).json(
-                    { patient: patient[0]}
+                    patient[0]
                 );
-                else response.status(200).json(
-                    { patient: {}}
-                );
+                else response.status(200).json({});
             }
         }
     )
@@ -119,7 +117,6 @@ const getDataPatient = (body) => {
         last_name : body.last_name,
         second_last_name : body.second_last_name,
         sex : body.sex,
-        age : body.age,
         birthday : body.birthday,
         inscription_date : body.inscription_date,
         id_hospital : body.id_hospital,

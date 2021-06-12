@@ -16,12 +16,21 @@ import { DialogConfirmDeleteComponent } from './dialog-confirm-delete/dialog-con
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
+import { ListPatientComponent } from './list-patient/list-component.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogConfirmDeleteComponent,
     EditPatientComponent,
+    ListPatientComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,15 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
     MatButtonToggleModule,
     MatTableModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: "es-MX" }],
   bootstrap: [AppComponent]

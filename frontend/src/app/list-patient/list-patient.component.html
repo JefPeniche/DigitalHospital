@@ -1,0 +1,151 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row>
+    <span>Digital Hospital</span>
+    <span class="spacer"></span>
+    <a href="/edit" mat-button >AÑADIR NUEVO PACIENTE</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="accions">
+  <mat-button-toggle-group>
+    <mat-button-toggle [checked]="!isGridView" (click)="gridView(false)">
+      <mat-icon>list</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle [checked]="isGridView" (click)="gridView(true)">
+      <mat-icon>grid_view</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <button mat-raised-button color="primary" (click)="exportToPDF()" class="export-button" >EXPORTAR A PDF</button>
+</div>
+
+<div class="grid-view" *ngIf="isGridView; else elseblock" >
+  <div class="patient-card"  *ngFor="let patient of patients">
+    <div class="card-content">
+      <div class="card-banner" [ngClass]="{'banner-accent': patient.sex === 'F'}">
+        <div class="inscription">
+          <p class="accent-subtitle">Fecha de inscripción</p>
+          <p class="accent-date" > {{patient.inscription_date | date:"dd MMM"}} </p>
+          <p class="accent-year" > {{patient.inscription_date | date:"YYYY"}} </p>
+        </div>
+        <div class="hospital">
+          <p class="accent-subtitle" >Lugar de origen</p>
+          <p class="accent-info" >
+            {{patient.hospital_name}}
+            <mat-icon class="hospital-icon" aria-hidden="false" aria-label="guardian icon">apartment</mat-icon>
+          </p>
+          <p class="accent-info">
+            {{patient.hospital_city}}
+            <mat-icon class="hospital-icon" aria-hidden="false" aria-label="guardian icon">place</mat-icon>
+          </p>
+        </div>
+      </div>
+      <mat-card >
+        <mat-card-header>
+          <mat-card-title>{{patient.names}}</mat-card-title>
+          <mat-card-subtitle>{{patient.last_name}} {{patient.second_last_name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="personal-info">
+            <p>  {{patient.birthday | date:'dd MMM YYYY'}}
+              <span> ({{patient.age}} años) </span>
+            </p>
+            <p> {{patient.sex==='M'? 'Hombre' :'Mujer' }} </p>
+          </div>
+          <mat-divider [inset]="true"></mat-divider>
+          <p class="guardian-subtitle">Tutor</p>
+          <p class="guardian-info">
+            <mat-icon class="guardian-icon" aria-hidden="false" aria-label="guardian icon">person</mat-icon>
+            {{patient.guardian_name}}
+          </p>
+          <p class="guardian-info">
+            <mat-icon class="guardian-icon" aria-hidden="false" aria-label="guardian icon">phone</mat-icon>
+
+            {{patient.guardian_phone}} </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button [href]="'/edit/'+patient.id" [color]="patient.sex=== 'M'? 'primary':'accent'">EDITAR</a>
+          <button mat-button color="warn" (click)="openConfirmDialog(patient.id)">ELIMINAR</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #elseblock>
+  <table mat-table [dataSource]="patients" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="names">
+      <th mat-header-cell *matHeaderCellDef> Nombres </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.names}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef> Apellido Paterno </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.last_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="second_last_name">
+      <th mat-header-cell *matHeaderCellDef> Apellido Materno </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.second_last_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sex">
+      <th mat-header-cell *matHeaderCellDef> Sexo </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.sex==='M'? 'Hombre' :'Mujer' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="birthday">
+      <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.birthday | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Edad </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inscription_date">
+      <th mat-header-cell *matHeaderCellDef> Fecha de inscripción </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.inscription_date | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hospital_name">
+      <th mat-header-cell *matHeaderCellDef> Hospital de origen </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.hospital_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hospital_city">
+      <th mat-header-cell *matHeaderCellDef> Ciudad de origen </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.hospital_city}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="guardian_name">
+      <th mat-header-cell *matHeaderCellDef> Tutor </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.guardian_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="guardian_phone">
+      <th mat-header-cell *matHeaderCellDef> Contacto </th>
+      <td mat-cell *matCellDef="let patient"> {{patient.guardian_phone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="accions">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let patient">
+        <button mat-raised-button color="primary">EDITAR</button>
+        <button mat-button color="warn" (click)="openConfirmDialog(patient.id)" >ELIMINAR</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</ng-template>
+
+
+
+
+
+
