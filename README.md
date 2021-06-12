@@ -53,7 +53,9 @@ ng add @angular/material
    * Para el tema del sistema seleccione la primera opción:  Indigo/Pink.
    * Para el estilo de la tipografía escriba **y**
    * Para las animaciones escriba **n**
->Salida esperada: 
+
+>Salida esperada:
+>
 >![material output](./images/material_output.jpeg)
 
 ``` shell
@@ -68,4 +70,4 @@ npm start
 >Salida esperada:
 > ![front start](./images/front_start.jpeg)
 
-4. En el navegador, entrar a la siguiente ruta: [localhost:4200](localhost:4200)
+4. En el navegador, entrar a la siguiente ruta: [localhost:4200](http://localhost:4200)
