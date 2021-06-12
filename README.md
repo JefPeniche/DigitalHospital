@@ -16,22 +16,26 @@ Prueba técnica para el proceso de selección de Nativo Digital.
 ``` shell
 npm install
 ```
->Salida esparada: ![back output](./images/back_output.jpeg)
+>Salida esperada: 
+>![back output](./images/back_output.jpeg)
 
 ``` shell
 npm install express
 ```
->Salida esparada: ![express output](./images/express_output.jpeg)
+>Salida esperada: 
+>![express output](./images/express_output.jpeg)
 
 ``` shell
 npm install mysql
 ```
->Salida esparada: ![mysql output](./images/mysql_output.jpeg)
+>Salida esperada: 
+>![mysql output](./images/mysql_output.jpeg)
 
 ``` shell
 npm start 
 ```
->Salida esparada: ![back start](./images/back_start.jpeg)
+>Salida esperada: 
+>![back start](./images/back_start.jpeg)
 
 ### Frontend
 1. Para poder ejecutar correctamente la aplicación web necesita tener instalado [Angular](https://angular.io/guide/setup-local).
@@ -40,7 +44,8 @@ npm start
 ``` shell
 npm install
 ```
->Salida esparada: ![front output](./images/front_output.jpeg)
+>Salida esperada: 
+>![front output](./images/front_output.jpeg)
 
 ``` shell
 ng add @angular/material
@@ -48,16 +53,19 @@ ng add @angular/material
    * Para el tema del sistema seleccione la primera opción:  Indigo/Pink.
    * Para el estilo de la tipografía escriba **y**
    * Para las animaciones escriba **n**
->Salida esparada: ![material output](./images/material_output.jpeg)
+>Salida esperada: 
+>![material output](./images/material_output.jpeg)
 
 ``` shell
 npm install jspdf --save
 ```
->Salida esparada: ![jspdf output](./images/jspdf_output.jpeg)
+>Salida esperada: 
+>![jspdf output](./images/jspdf_output.jpeg)
 
 ``` shell
 npm start 
 ```
->Salida esparada: ![front start](./images/front_start.jpeg)
+>Salida esperada:
+> ![front start](./images/front_start.jpeg)
 
 4. En el navegador, entrar a la siguiente ruta: [localhost:4200](localhost:4200)
